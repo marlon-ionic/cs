@@ -20,9 +20,7 @@ const storage = diskStorage({
 })
 @Module({
   imports: [
-    MulterModule.register({
-      storage
-    })
+    MulterModule.register()
   ],
   controllers: [UploadController],
   providers: [UploadService],
