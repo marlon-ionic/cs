@@ -13,7 +13,7 @@ const storage = diskStorage({
     cb(null, './api-uploaded')
   },
   filename: ( _req, file, cb) => {
-    const fn = `${uuidv4().replaceAll('-', '')}${path.extname(file.originalname)}`
+    const fn = `${uuidv4().replace('-', '')}${path.extname(file.originalname)}`
     console.log('diskStorage.destination', fn, file);
     cb(null, fn);
   }
