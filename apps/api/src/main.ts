@@ -16,7 +16,7 @@ async function bootstrap() {
   app.setGlobalPrefix(globalPrefix);
   const port = process.env.PORT || 3333;
   app.enableCors({
-    origin:['http://localhost:4200', 'capacitor://localhost'],
+    origin:['http://localhost:4200', 'http://localhost:8100', 'capacitor://localhost'],
     credentials:true,
   });
   await app.listen(port);
