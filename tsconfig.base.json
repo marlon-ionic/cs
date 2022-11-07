@@ -15,7 +15,8 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
-      "@cs/api-interfaces": ["libs/api-interfaces/src/index.ts"]
+      "@cs/api-interfaces": ["libs/api-interfaces/src/index.ts"],
+      "@cs/feature-api-upload": ["libs/feature/api/upload/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]

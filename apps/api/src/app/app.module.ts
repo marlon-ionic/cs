@@ -7,6 +7,7 @@ import path = require('path');
 import { v4 as uuidv4 } from 'uuid';
 import { MulterModule } from '@nestjs/platform-express';
 import { diskStorage } from 'multer';
+import { UploadModule } from '@cs/feature-api-upload';
 
 const storage = diskStorage({
   destination: (_req, _file, cb) => {
@@ -21,7 +22,8 @@ const storage = diskStorage({
   imports: [
     MulterModule.register({
       storage
-    })
+    }),
+    UploadModule
   ],
   controllers: [AppController],
   providers: [AppService],
