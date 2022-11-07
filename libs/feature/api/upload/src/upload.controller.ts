@@ -25,6 +25,7 @@ export class UploadController {
     } else {
       response.cookie('serverkey', uuidv4());
     }
+    console.log('files', files);
     return {
       body,
       cookies: request.cookies
