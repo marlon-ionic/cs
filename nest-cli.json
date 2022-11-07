@@ -1,0 +1,16 @@
+{
+  "projects": {
+    "upload": {
+      "type": "library",
+      "root": "libs/feature/api/upload",
+      "entryFile": "index",
+      "sourceRoot": "libs/feature/api/upload/src",
+      "compilerOptions": {
+        "tsConfigPath": "libs/feature/api/upload/tsconfig.lib.json"
+      }
+    }
+  },
+  "compilerOptions": {
+    "webpack": true
+  }
+}
