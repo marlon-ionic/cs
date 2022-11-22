@@ -19,7 +19,7 @@ export class UploadController {
   getUploadKeys(@Req() request: Request,
   @Res({ passthrough: true }) response: Response) {
     const id = uuidv4();
-    response.cookie('httponlykey', id, { httpOnly:true });
+    response.cookie('httponlykey', uuidv4(), { httpOnly:true });
     response.cookie('getkey', id, { httpOnly:false });
     return {
       id,
