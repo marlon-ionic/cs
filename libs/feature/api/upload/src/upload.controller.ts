@@ -1,4 +1,4 @@
-import { Body, Controller, HttpException, HttpStatus, Post, Req, Res, UploadedFiles, UseInterceptors } from '@nestjs/common';
+import { Body, Controller, Get, HttpException, HttpStatus, Post, Req, Res, UploadedFiles, UseInterceptors } from '@nestjs/common';
 import { FileFieldsInterceptor } from '@nestjs/platform-express';
 import { UploadService } from './upload.service';
 import { Request, Response } from 'express';
@@ -14,6 +14,18 @@ export class UploadController {
     { name: 'image', maxCount: 1 },
     { name: 'jsonFile', maxCount: 1 },
   ]))
+
+  @Get()
+  getUploadKeys(@Req() request: Request,
+  @Res({ passthrough: true }) response: Response) {
+    const id = uuidv4();
+    response.cookie('getkey', id, { httpOnly:false });
+    return {
+      id,
+      cookies: request.cookies
+    }
+  }
+
   @Post()
   uploadFile(
     @Req() request: Request,
