@@ -14,19 +14,6 @@ export class UploadController {
     { name: 'image', maxCount: 1 },
     { name: 'jsonFile', maxCount: 1 },
   ]))
-
-  @Get()
-  getUploadKeys(@Req() request: Request,
-  @Res({ passthrough: true }) response: Response) {
-    const id = uuidv4();
-    response.cookie('httponlykey', uuidv4(), { httpOnly:true });
-    response.cookie('getkey', id, { httpOnly:false });
-    return {
-      id,
-      cookies: request.cookies
-    }
-  }
-
   @Post()
   uploadFile(
     @Req() request: Request,
@@ -43,5 +30,17 @@ export class UploadController {
       body,
       cookies: request.cookies
     };
+  }
+
+  @Get()
+  getUploadKeys(@Req() request: Request,
+  @Res({ passthrough: true }) response: Response) {
+    const id = uuidv4();
+    response.cookie('httponlykey', uuidv4(), { httpOnly:true });
+    response.cookie('getkey', id, { httpOnly:false });
+    return {
+      id,
+      reqCookies: request.cookies
+    }
   }
 }
