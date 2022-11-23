@@ -17,7 +17,9 @@ async function bootstrap() {
   const port = process.env.PORT || 3333;
   app.enableCors({
     credentials:true,
+    origin: ['capacitor://localhost', 'http://localhosta:8100']
   });
+
   await app.listen(port);
   Logger.log(
     `🚀 Application is running on: http://localhost:${port}/${globalPrefix}`
