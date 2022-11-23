@@ -7,20 +7,27 @@ import 'multer';
 
 @Controller('upload')
 export class UploadController {
-
   constructor(private readonly uploadService: UploadService) {}
 
-  @UseInterceptors(FileFieldsInterceptor([
-    { name: 'image', maxCount: 1 },
-    { name: 'jsonFile', maxCount: 1 },
-  ]))
+  @UseInterceptors(
+    FileFieldsInterceptor([
+      { name: 'image', maxCount: 1 },
+      { name: 'jsonFile', maxCount: 1 },
+    ])
+  )
   @Post()
   uploadFile(
     @Req() request: Request,
     @Res({ passthrough: true }) response: Response,
     @Body() body: any,
-    @UploadedFiles() files: { image?: Express.Multer.File[], jsonFile?: Express.Multer.File[] }) {
-    if(request.cookies['key'] === null || request.cookies['key'] === undefined || request.cookies['key'] === '') {
+    @UploadedFiles()
+    files: { image?: Express.Multer.File[]; jsonFile?: Express.Multer.File[] }
+  ) {
+    if (
+      request.cookies['key'] === null ||
+      request.cookies['key'] === undefined ||
+      request.cookies['key'] === ''
+    ) {
       throw new HttpException('Missing key cookie!', HttpStatus.FORBIDDEN);
     } else {
       response.cookie('serverkey', uuidv4());
@@ -28,19 +35,21 @@ export class UploadController {
     console.log('files', files);
     return {
       body,
-      cookies: request.cookies
+      cookies: request.cookies,
     };
   }
 
   @Get()
-  getUploadKeys(@Req() request: Request,
-  @Res({ passthrough: true }) response: Response) {
+  getUploadKeys(
+    @Req() request: Request,
+    @Res({ passthrough: true }) response: Response
+  ) {
     const id = uuidv4();
-    response.cookie('httponlykey', uuidv4(), { httpOnly:true });
-    response.cookie('getkey', id, { httpOnly:false });
+    response.cookie('httponlykey', uuidv4(), { httpOnly: true });
+    response.cookie('getkey', id, { httpOnly: false });
     return {
       id,
-      reqCookies: request.cookies
-    }
-}
+      reqCookies: request.cookies,
+    };
+  }
 }
