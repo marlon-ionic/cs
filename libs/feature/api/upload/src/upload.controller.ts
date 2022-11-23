@@ -42,5 +42,5 @@ export class UploadController {
       id,
       reqCookies: request.cookies
     }
-  }
+}
 }
