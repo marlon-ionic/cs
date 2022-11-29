@@ -17,7 +17,7 @@ async function bootstrap() {
   const port = process.env.PORT || 3333;
   app.enableCors({
     credentials:true,
-    origin: ['capacitor://localhost', 'http://localhost:8100']
+    origin: ['capacitor://localhost', 'http://localhost:8100', process.env.CLIENT_URL, 'localhost']
   });
 
   await app.listen(port);

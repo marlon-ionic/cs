@@ -28,12 +28,33 @@ export class UploadController {
       request.cookies['key'] === undefined ||
       request.cookies['key'] === ''
     ) {
+      console.log(request.cookies);
       throw new HttpException('Missing key cookie!', HttpStatus.FORBIDDEN);
     } else {
       response.cookie('serverkey', uuidv4());
     }
     console.log('files', files);
+    let uploadedJson;
+    if(files?.jsonFile?.length > 0) {
+      const f = files?.jsonFile[0];
+      uploadedJson = {
+        originalname: f.originalname,
+        mimetype: f.mimetype,
+        size: f.size
+      }
+    }
+    let uploadedImage;
+    if(files?.image?.length > 0) {
+      const f = files?.image[0];
+      uploadedImage = {
+        originalname: f.originalname,
+        mimetype: f.mimetype,
+        size: f.size
+      }
+    }
     return {
+      uploadedJson,
+      uploadedImage,
       body,
       cookies: request.cookies,
     };
