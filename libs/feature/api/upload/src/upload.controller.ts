@@ -34,6 +34,7 @@ export class UploadController {
       response.cookie('serverkey', uuidv4());
     }
     console.log('files', files);
+    let bodyResponse = body;
     let uploadedJson;
     if(files?.jsonFile?.length > 0) {
       const f = files?.jsonFile[0];
@@ -42,6 +43,7 @@ export class UploadController {
         mimetype: f.mimetype,
         size: f.size
       }
+      bodyResponse = {...{jsonFile: uploadedJson}, ...bodyResponse};
     }
     let uploadedImage;
     if(files?.image?.length > 0) {
@@ -51,11 +53,12 @@ export class UploadController {
         mimetype: f.mimetype,
         size: f.size
       }
+      bodyResponse = {...{image: uploadedImage}, ...bodyResponse};
     }
     return {
       uploadedJson,
       uploadedImage,
-      body,
+      body: bodyResponse,
       cookies: request.cookies,
     };
   }
